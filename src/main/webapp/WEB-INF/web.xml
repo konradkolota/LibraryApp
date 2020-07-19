@@ -1,0 +1,90 @@
+<web-app version="4.0"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee">
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <servlet>
+        <servlet-name>BookAddServlet</servlet-name>
+        <servlet-class>pl.kk.servlet.BookAddServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BookAddServlet</servlet-name>
+        <url-pattern>/add</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>BookDeleteServlet</servlet-name>
+        <servlet-class>pl.kk.servlet.BookDeleteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BookDeleteServlet</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>BookSearchServlet</servlet-name>
+        <servlet-class>pl.kk.servlet.BookAuthorSearchServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BookSearchServlet</servlet-name>
+        <url-pattern>/searchByAuthor</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>BookIsbnSearchServlet</servlet-name>
+        <servlet-class>pl.kk.servlet.BookIsbnSearchServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BookIsbnSearchServlet</servlet-name>
+        <url-pattern>/searchByIsbn</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>BookBorrowServlet</servlet-name>
+        <servlet-class>pl.kk.servlet.BookBorrowServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BookBorrowServlet</servlet-name>
+        <url-pattern>/borrow</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>BookReturnServlet</servlet-name>
+        <servlet-class>pl.kk.servlet.BookReturnServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BookReturnServlet</servlet-name>
+        <url-pattern>/return</url-pattern>
+    </servlet-mapping>
+
+    <security-role>
+        <role-name>administrator</role-name>
+    </security-role>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>
+                SecuredAdminPrivileges
+            </web-resource-name>
+            <url-pattern>
+                /add
+            </url-pattern>
+            <url-pattern>
+                /delete
+            </url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>
+                Tylko administrator ma możliwość usuwania i dodawania książek.
+            </description>
+            <role-name>
+                administrator
+            </role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>BASIC</auth-method>
+    </login-config>
+</web-app>
